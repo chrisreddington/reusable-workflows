@@ -14,9 +14,9 @@ on:
         type: string
         default: doa-ep1
     secrets:
-      acr_username:
+      ACR_USERNAME:
         required: true
-      acr_password:
+      ACR_PASSWORD:
         required: true
 jobs:
   build:
