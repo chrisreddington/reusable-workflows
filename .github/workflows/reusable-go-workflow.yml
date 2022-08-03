@@ -1,0 +1,43 @@
+on:
+  workflow_call:
+    inputs:
+      TAG:
+        required: true
+        type: string
+        default: v1
+      SERVER:
+        required: true
+        type: string
+        default: devopsonazure.azurecr.io
+      IMAGE:
+        required: true
+        type: string
+        default: doa-ep1
+    secrets:
+      acr_username:
+        required: true
+      acr_password:
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
+      - name: Test
+        run: go test -v ./...
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ inputs.SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - run: |
+          docker build . -t ${{ inputs.SERVER }}/${{ inputs.IMAGE }}:${{ inputs.TAG }}
+          docker push ${{ inputs.SERVER }}/${{ inputs.IMAGE }}:${{ inputs.TAG }}
