@@ -4,7 +4,7 @@ on:
       TAG:
         required: true
         type: string
-        default: v1
+        default: v1-reusable-example
       SERVER:
         required: true
         type: string
