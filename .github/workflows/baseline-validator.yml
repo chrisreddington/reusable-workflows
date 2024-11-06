@@ -23,8 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        name: "Checkout Repository"
       
       - uses: chrisreddington/validate-devcontainer@main
+        name: "Validate Dev Container Configuration"
         if: always()
         with:
           extensions-list: ${{ inputs.extensions-list }}
@@ -32,6 +34,7 @@ jobs:
           validate-tasks: 'true'
 
       - uses: chrisreddington/validate-file-exists@main
+        name: "Validate Required Files Exist"
         if: always()
         with:
           files: ${{ inputs.required-files }}
