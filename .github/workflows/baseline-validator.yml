@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       extensions-list:
-        required: true
+        required: false
         type: string
         description: 'Comma-separated list of required VS Code extensions'
         default: 'GitHub.codespaces,github.vscode-github-actions,GitHub.copilot,GitHub.copilot-chat,github.copilot-workspace,GitHub.vscode-pull-request-github,GitHub.remotehub,GitHub.vscode-codeql'
