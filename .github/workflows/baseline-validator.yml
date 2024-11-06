@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       extensions-list:
-        required: false
+        required: true
         type: string
         description: 'Comma-separated list of required VS Code extensions'
         default: 'GitHub.codespaces,github.vscode-github-actions,GitHub.copilot,GitHub.copilot-chat,github.copilot-workspace,GitHub.vscode-pull-request-github,GitHub.remotehub,GitHub.vscode-codeql'
@@ -12,43 +12,28 @@ on:
         type: string
         default: '.devcontainer/devcontainer.json'
         description: 'Path to devcontainer.json file'
+      required-files:
+          required: false
+          type: string
+          default: 'README.md, LICENSE, .gitignore'
+          description: 'Path to devcontainer.json file'
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       
-      - name: Read devcontainer.json
-        id: read-config
-        run: |
-          if [ ! -f "${{ inputs.devcontainer-path }}" ]; then
-            echo "Error: devcontainer.json not found at ${{ inputs.devcontainer-path }}"
-            exit 1
-          fi
-          echo "config=$(cat ${{ inputs.devcontainer-path }})" >> $GITHUB_OUTPUT
+      - uses: chrisreddington/validate-devcontainer@main
+        with:
+          # Required Visual Studio Code extensions (comma-separated)
+          extensions-list: ${{ inputs.extensions-list }}
 
-      - name: Validate required extensions
-        id: validate-extensions
-        run: |
-          # Convert input list to array
-          IFS=',' read -ra REQUIRED <<< "${{ inputs.extensions-list }}"
-          
-          # Get extensions from devcontainer.json
-          CONFIGURED=$(jq -r '.customizations.vscode.extensions[]' ${{ inputs.devcontainer-path }})
-          
-          # Check each required extension
-          MISSING=()
-          for ext in "${REQUIRED[@]}"; do
-            if ! echo "$CONFIGURED" | grep -q "^${ext}$"; then
-              MISSING+=("$ext")
-            fi
-          done
-          
-          # Report results
-          if [ ${#MISSING[@]} -ne 0 ]; then
-            echo "::error::Missing required extensions: ${MISSING[*]}"
-            exit 1
-          fi
-          echo "All required extensions are configured"
+          # Optional: Path to devcontainer.json
+          devcontainer-path: ${{ inputs.devcontainer-path }}
+
+          # Optional: Enable task validation
+          validate-tasks: 'true'
+      - uses: chrisreddington/validate-file-exists@main
+        with:
+          files: ${{ inputs.required-files }}
