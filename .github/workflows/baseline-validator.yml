@@ -38,3 +38,7 @@ jobs:
         if: always()
         with:
           files: ${{ inputs.required-files }}
+          
+      - uses: chrisreddington/validate-dependabot@main
+        name: "Validate Dependabot is configured for repository's languages"
+        if: always()
