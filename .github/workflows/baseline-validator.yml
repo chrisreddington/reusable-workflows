@@ -15,7 +15,7 @@ on:
       required-files:
           required: false
           type: string
-          default: 'README.md, LICENSE, .gitignore'
+          default: 'README.md, LICENSE, .gitignore, .github/copilot-instructions.md'
           description: 'Path to devcontainer.json file'
 
 jobs:
