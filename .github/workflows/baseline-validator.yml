@@ -23,16 +23,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        continue-on-error: true
       
       - uses: chrisreddington/validate-devcontainer@main
-        continue-on-error: true
+        if: always()
         with:
           extensions-list: ${{ inputs.extensions-list }}
           devcontainer-path: ${{ inputs.devcontainer-path }}
           validate-tasks: 'true'
 
       - uses: chrisreddington/validate-file-exists@main
-        continue-on-error: true
+        if: always()
         with:
           files: ${{ inputs.required-files }}
