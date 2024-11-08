@@ -27,6 +27,14 @@ Before submitting a PR:
 - Document the testing process and results
 - Ensure changes don't break existing workflow implementations
 
+## Workflow Parameters
+
+The baseline validator workflow accepts the following parameters:
+- `required-extensions`: Comma-separated list of required VS Code extensions
+- `devcontainer-path`: Path to devcontainer.json file
+- `required-files`: List of required files that must exist in the repository
+- `required-features`: List of required features that must be used in the devcontainer.json file
+
 ## License
 
 This repository is licensed under the [MIT License](LICENSE).
