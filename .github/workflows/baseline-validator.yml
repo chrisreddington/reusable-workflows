@@ -82,7 +82,7 @@ jobs:
         name: "Validate Required Files Exist"
         if: always()
         with:
-          files: ${{ inputs.required-files }}
+          required-files: ${{ inputs.required-files }}
 
       # Validate Dependabot is configured for any languages it supports that are present in the repository
       # Learn more at https://github.com/chrisreddington/validate-dependabot
