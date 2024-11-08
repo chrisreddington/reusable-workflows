@@ -2,9 +2,9 @@ name: Validate Repository Configuration
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -12,4 +12,4 @@ jobs:
     name: Validate Baseline Configuration
     uses: ./.github/workflows/baseline-validator.yml
     with:
-      required-features: 'ghcr.io/devcontainers/features/github-cli:1, ghcr.io/devcontainers-extra/features/act'
+      required-features: "ghcr.io/devcontainers/features/github-cli:1, ghcr.io/devcontainers-extra/features/act"

@@ -23,6 +23,7 @@ Contributions are welcome! Please follow these steps:
 ### Testing Workflows
 
 Before submitting a PR:
+
 - Test any workflow changes in a sample repository
 - Document the testing process and results
 - Ensure changes don't break existing workflow implementations
@@ -30,6 +31,7 @@ Before submitting a PR:
 ## Workflow Parameters
 
 The baseline validator workflow accepts the following parameters:
+
 - `required-extensions`: Comma-separated list of required VS Code extensions
 - `devcontainer-path`: Path to devcontainer.json file
 - `required-files`: List of required files that must exist in the repository

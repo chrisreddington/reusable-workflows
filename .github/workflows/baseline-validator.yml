@@ -34,23 +34,23 @@ on:
       required-extensions:
         required: false
         type: string
-        description: 'Comma-separated list of required VS Code extensions'
-        default: 'GitHub.codespaces,github.vscode-github-actions,GitHub.copilot,GitHub.copilot-chat,github.copilot-workspace,GitHub.vscode-pull-request-github,GitHub.remotehub,GitHub.vscode-codeql'
+        description: "Comma-separated list of required VS Code extensions"
+        default: "GitHub.codespaces,github.vscode-github-actions,GitHub.copilot,GitHub.copilot-chat,github.copilot-workspace,GitHub.vscode-pull-request-github,GitHub.remotehub,GitHub.vscode-codeql"
       required-features:
         required: false
         type: string
-        description: 'Comma-separated list of required Dev Container features'
-        default: ''
+        description: "Comma-separated list of required Dev Container features"
+        default: ""
       devcontainer-path:
         required: false
         type: string
-        default: '.devcontainer/devcontainer.json'
-        description: 'Path to devcontainer.json file'
+        default: ".devcontainer/devcontainer.json"
+        description: "Path to devcontainer.json file"
       required-files:
-          required: false
-          type: string
-          default: 'README.md, LICENSE, .gitignore, .github/copilot-instructions.md'
-          description: 'Path to devcontainer.json file'
+        required: false
+        type: string
+        default: "README.md, LICENSE, .gitignore, .github/copilot-instructions.md"
+        description: "Path to devcontainer.json file"
 
 jobs:
   # Job that validates the baseline configuration
@@ -64,7 +64,7 @@ jobs:
       # This step is required for GitHub Actions workflows to interact with repository contents
       - uses: actions/checkout@v4
         name: "Checkout Repository"
-      
+
       # Validate the Dev Container configuration
       # Learn more at https://github.com/chrisreddington/validate-devcontainer
       - uses: chrisreddington/validate-devcontainer@main
@@ -74,7 +74,7 @@ jobs:
           required-extensions: ${{ inputs.required-extensions }}
           required-features: ${{ inputs.required-features }}
           devcontainer-path: ${{ inputs.devcontainer-path }}
-          validate-tasks: 'true'
+          validate-tasks: "true"
 
       # Validate the existence of required files
       # Learn more at https://github.com/chrisreddington/validate-file-exists
@@ -83,7 +83,7 @@ jobs:
         if: always()
         with:
           files: ${{ inputs.required-files }}
-      
+
       # Validate Dependabot is configured for any languages it supports that are present in the repository
       # Learn more at https://github.com/chrisreddington/validate-dependabot
       - uses: chrisreddington/validate-dependabot@main
