@@ -1,0 +1,20 @@
+{
+  "name": "sample-workflows",
+  "version": "1.0.0",
+  "description": "This repository houses a collection of reusable GitHub Actions workflows that are utilized across our sample projects. These workflows are designed to provide consistent automation and CI/CD processes across multiple repositories.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . -c ./.github/linters/eslint.config.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/json": "^0.6.0",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.12.0",
+    "prettier": "^3.3.3"
+  }
+}
