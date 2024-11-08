@@ -22,6 +22,7 @@ overrides:
     parser: jsonc-eslint-parser
     parserOptions:
       jsonSyntax: JSONC
+      allowComments: true
 
   # JSONC files
   - files:
