@@ -1,10 +1,15 @@
 # This workflow validates the Dev Container configuration and required files in a repository
 #
 # Inputs:
-#   extensions-list:
+#   required-extensions:
 #     Description: Comma-separated list of required VS Code extensions
 #     Required: false
 #     Default: GitHub.codespaces and other essential GitHub extensions
+#
+#   required-features:
+#     Description: Comma-separated list of required Dev Container features
+#     Required: false
+#     Default: ghcr.io/devcontainers/features/github-cli,ghcr.io/devcontainers-extra/features/act
 #
 #   devcontainer-path:
 #     Description: Path to devcontainer.json file
@@ -26,11 +31,16 @@ name: Validate Dev Container Configuration
 on:
   workflow_call:
     inputs:
-      extensions-list:
+      required-extensions:
         required: false
         type: string
         description: 'Comma-separated list of required VS Code extensions'
         default: 'GitHub.codespaces,github.vscode-github-actions,GitHub.copilot,GitHub.copilot-chat,github.copilot-workspace,GitHub.vscode-pull-request-github,GitHub.remotehub,GitHub.vscode-codeql'
+      required-features:
+        required: false
+        type: string
+        description: 'Comma-separated list of required Dev Container features'
+        default: ''
       devcontainer-path:
         required: false
         type: string
@@ -61,7 +71,8 @@ jobs:
         name: "Validate Dev Container Configuration"
         if: always()
         with:
-          extensions-list: ${{ inputs.extensions-list }}
+          required-extensions: ${{ inputs.required-extensions }}
+          required-features: ${{ inputs.required-features }}
           devcontainer-path: ${{ inputs.devcontainer-path }}
           validate-tasks: 'true'
 
