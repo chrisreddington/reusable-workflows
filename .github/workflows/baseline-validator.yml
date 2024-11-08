@@ -1,3 +1,27 @@
+# This workflow validates the Dev Container configuration and required files in a repository
+#
+# Inputs:
+#   extensions-list:
+#     Description: Comma-separated list of required VS Code extensions
+#     Required: false
+#     Default: GitHub.codespaces and other essential GitHub extensions
+#
+#   devcontainer-path:
+#     Description: Path to devcontainer.json file
+#     Required: false
+#     Default: .devcontainer/devcontainer.json
+#
+#   required-files:
+#     Description: List of required files that must exist in the repository
+#     Required: false
+#     Default: README.md, LICENSE, .gitignore, .github/copilot-instructions.md
+#
+# The workflow:
+# 1. Checks out the repository
+# 2. Validates the Dev Container configuration including any defined tasks
+# 3. Verifies the existence of required files
+#
+# Note: Steps run with if: always() to ensure all  validations execute regardless of previous step failures
 name: Validate Dev Container Configuration
 on:
   workflow_call:
@@ -19,12 +43,20 @@ on:
           description: 'Path to devcontainer.json file'
 
 jobs:
+  # Job that validates the baseline configuration
   validate:
+    # Find details about the runs-on property at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    # Uses Ubuntu latest as the runner environment
+    # This job is intended to run checks against the baseline configuration
     runs-on: ubuntu-latest
     steps:
+      # Checks out the repository under $GITHUB_WORKSPACE, so the job can access it
+      # This step is required for GitHub Actions workflows to interact with repository contents
       - uses: actions/checkout@v3
         name: "Checkout Repository"
       
+      # Validate the Dev Container configuration
+      # Learn more at https://github.com/chrisreddington/validate-devcontainer
       - uses: chrisreddington/validate-devcontainer@main
         name: "Validate Dev Container Configuration"
         if: always()
@@ -33,12 +65,16 @@ jobs:
           devcontainer-path: ${{ inputs.devcontainer-path }}
           validate-tasks: 'true'
 
+      # Validate the existence of required files
+      # Learn more at https://github.com/chrisreddington/validate-file-exists
       - uses: chrisreddington/validate-file-exists@main
         name: "Validate Required Files Exist"
         if: always()
         with:
           files: ${{ inputs.required-files }}
-          
+      
+      # Validate Dependabot is configured for any languages it supports that are present in the repository
+      # Learn more at https://github.com/chrisreddington/validate-dependabot
       - uses: chrisreddington/validate-dependabot@main
         name: "Validate Dependabot is configured for repository's languages"
         if: always()
