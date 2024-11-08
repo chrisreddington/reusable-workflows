@@ -1,0 +1,17 @@
+# This is the dependabot configuration file that automates dependency updates
+# Version 2 is the latest version of the dependabot configuration syntax
+# Updates section configures how dependabot should handle dependency updates:
+# - Monitors GitHub Actions workflow dependencies in the root directory
+# - Checks for updates weekly
+#
+# Learn more at https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#configuration-options-for-the-dependabotyml-file
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "nuget"
+    directory: "/src"
+    schedule:
+      interval: "weekly"
