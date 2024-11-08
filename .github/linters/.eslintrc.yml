@@ -1,0 +1,28 @@
+---
+env:
+  browser: true
+  es6: true
+  jest: true
+
+ignorePatterns:
+  - "!.*"
+  - "**/node_modules/.*"
+
+parser: "@typescript-eslint/parser"
+
+plugins:
+  - "@typescript-eslint"
+
+overrides:
+  # JSON files
+  - files:
+      - "*.json"
+      - "*.jsonc"
+      - "*.json5"
+    extends:
+      - plugin:jsonc/recommended-with-jsonc
+    parser: jsonc-eslint-parser
+    parserOptions:
+      jsonSyntax: JSONC
+    rules:
+      jsonc/no-comments: "off"
