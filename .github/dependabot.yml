@@ -7,10 +7,15 @@
 # Learn more at https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#configuration-options-for-the-dependabotyml-file
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
+    groups:
+      actions-minor:
+        update-types:
+          - minor
+          - patch
   - package-ecosystem: "nuget"
     directory: "/src"
     schedule:
