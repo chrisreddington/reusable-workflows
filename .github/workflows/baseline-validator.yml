@@ -67,7 +67,7 @@ jobs:
 
       # Validate the Dev Container configuration
       # Learn more at https://github.com/chrisreddington/validate-devcontainer
-      - uses: chrisreddington/validate-devcontainer@v0.0.5
+      - uses: chrisreddington/validate-devcontainer@v0.0.6
         name: "Validate Dev Container Configuration"
         if: always()
         with:
@@ -78,7 +78,7 @@ jobs:
 
       # Validate the existence of required files
       # Learn more at https://github.com/chrisreddington/validate-file-exists
-      - uses: chrisreddington/validate-file-exists@v0.0.5
+      - uses: chrisreddington/validate-file-exists@v0.0.6
         name: "Validate Required Files Exist"
         if: always()
         with:
@@ -86,6 +86,6 @@ jobs:
 
       # Validate Dependabot is configured for any languages it supports that are present in the repository
       # Learn more at https://github.com/chrisreddington/validate-dependabot
-      - uses: chrisreddington/validate-dependabot@v0.0.5
+      - uses: chrisreddington/validate-dependabot@v0.0.6
         name: "Validate Dependabot is configured for repository's languages"
         if: always()
