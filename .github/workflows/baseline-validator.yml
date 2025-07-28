@@ -78,7 +78,7 @@ jobs:
 
       # Validate the existence of required files
       # Learn more at https://github.com/chrisreddington/validate-file-exists
-      - uses: chrisreddington/validate-file-exists@v0.0.7
+      - uses: chrisreddington/validate-file-exists@v0.0.8
         name: "Validate Required Files Exist"
         if: always()
         with:
